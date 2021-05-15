@@ -9,7 +9,7 @@ async def inline(client: Client, query: InlineQuery):
     answers = []
     search_query = query.query.lower().strip().rstrip()
 
-    if search_query == "" or search_query == "Search...":
+    if search_query == "":
         await client.answer_inline_query(
             query.id,
             results=answers,
@@ -29,7 +29,9 @@ async def inline(client: Client, query: InlineQuery):
                         result["viewCount"]["short"]
                     ),
                     input_message_content=InputTextMessageContent(
-                        "/play@KaoriMiyazonoRobot https://youtu.be/{}".format(result["id"]), disable_web_page_preview = True
+                        "https://www.youtube.com/watch?v={}".format(
+                            result["id"]
+                        )
                     ),
                     thumb_url=result["thumbnails"][0]["url"]
                 )

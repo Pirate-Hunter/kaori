@@ -1,4 +1,4 @@
-<h1 align="centre">Ohto Ai Plays</h1>
+<h1 align="centre">🎶 Music Bot 🎶</h1>
 
 ## Requirements 📝
 
@@ -11,7 +11,7 @@
 
 <h3 align="centre"> Heroku </h4>
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://www.github.com/Zack-Bloodshot/Ohto-Ai)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 Get STRING_NAME from here:
 
@@ -28,7 +28,6 @@ Get STRING_NAME from here:
 
 ## Credits
 
-- [Zack-Bloodshot](https://github.com/Zack-Bloodshot) A.K.A [A B H I](https://t.me/DontKnowWhoRU): Formatter
 - [Roj](https://github.com/rojserbest): main developer
 - [Marvin](https://github.com/BlackStoneReborn): bug reporter
 - [Laky](https://github.com/Laky-64) & [Andrew](https://github.com/AndrewLaneX): PyTgCalls

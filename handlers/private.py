@@ -4,36 +4,73 @@ import youtube_dl
 from youtube_search import YoutubeSearch
 import requests
 
-from helpers.filters import command, other_filters2
+from helpers.filters import command, other_filters2, other_filters
 from helpers.decorators import errors
+
 from pyrogram import Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, Voice
 
-from config import BOT_NAME as bn
+from config import BOT_NAME as bn, PLAY_PIC
 
 
 @Client.on_message(command("start") & other_filters2)
 async def start(_, message: Message):
+    hell_pic = PLAY_PIC
+    hell = f"I am **{bn}** !!\nI let you play music in your group's voice chat 😉\nTo get all commands and their explanation do /help\n\nEnjoy Streaming Music 😉"
+    butts = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton(
+                    "Group 💬", url="https://t.me/Its_Fuckin_Hell"
+                ),
+                InlineKeyboardButton(
+                    "Channel 📣", url="https://t.me/The_HellBot"
+                )
+            ]
+        ]
+    )
+    await message.reply_photo(
+    photo=hell_pic,
+    reply_markup=butts,
+    caption=hell,
+)
+
+
+@Client.on_message(command("repo") & other_filters2)
+async def repo(_, message: Message):
     await message.reply_text(
-        f'I am **Kaori** !! I can play music for you in your voice chat!!, send /help for command list...\nAdd me and @NarutoUzumakiSama and then use me!![... ](https://telegra.ph/file/9b476552f5ed7a76c7a1e.jpg)', parse_mode = "markdown", 
+        f"""🤠 Hoi!!
+I'm **{bn}** and below is the my source code 🙃
+
+Happy Streaming 😉
+""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "Add me to your group", url="https://t.me/KaoriMiyazonoRobot?startgroup=True"
-                    )],[
-                    InlineKeyboardButton(text = "My Owner", url = "https://t.me/The_Pirate_Hunter")
+                        "Repo 📑", url="https://github.com/TheVaders/vc_bot"
+                    ),
+                    InlineKeyboardButton(
+                        "Channel 📣", url="https://t.me/The_HellBot"
+                    ),
+                    InlineKeyboardButton (
+                        "Tutorial 🎬", url="https://youtu.be/XaH7VHURBVg"
+                    )
                 ]
             ]
         )
     )
 
-@Client.on_message(command("help") & other_filters2)
-@errors
-async def help(client, message: Message):
-  text = "I help ya all to play music!!\n The commands i  currently support are\n/play - Play the replied song or the youtube url given..\n/song - Upload the searched song in the chat..\n/pause - pause the song\n/resume - resumes music \n/skip - skips music\n/stop - stops\n/queue - to get the queue in your pm[...](https://telegra.ph/file/eb6414a4adc4582e239fc.mp4)"
-  await message.reply_text(text, parse_mode = "md")
-  
+
+@Client.on_message(command("ping") & other_filters)
+async def ping(_, message: Message):
+    hell_pic = PLAY_PIC
+    await message.reply_photo(
+    photo=hell_pic,
+    caption="I'm Alive and working fine. Do /help to get commands.\n\nHappy Streaming Music 😉",
+)
+
+
 @Client.on_message(command("song") & other_filters2)
 @errors
 async def a(client, message: Message):
@@ -42,7 +79,7 @@ async def a(client, message: Message):
         query += ' ' + str(i)
     okvai = query.capitalize()
     print(query.capitalize())
-    m = await message.reply(f"*🔍 Searching for {okvai}*", parse_mode="md")
+    m = await message.reply(f"**{bn} :-** 🔍 Searching for {okvai}")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = []
@@ -71,21 +108,21 @@ async def a(client, message: Message):
             open(thumb_name, 'wb').write(thumb.content)
 
         except Exception as e:
-            m.edit(f"Found nothing. Try changing the spelling a little.\n\n{e}")
+            m.edit(f"**{bn} :-** 😕 Found nothing. Try changing the spelling a little.\n\n{e}")
             return
     except Exception as e:
         m.edit(
-           f"Found Nothing. Sorry.\n\nTry another keywork or maybe spell it properly."
+           f"**{bn} :-** 😕 Found Nothing. Sorry.\n\nTry another keywork or maybe spell it properly."
         )
         print(str(e))
         return
-    await m.edit(f"Downloadingm hehe have patience...\n*Query :-* {okvai}")
+    await m.edit(f"**{bn} :-** 📥 Downloading...\n**Query :-** {okvai}")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = f' (^_-)\n*Title:* [{title[:35]}]({link})\n⏳ **Duration:  {duration}\n'
+        rep = f'🎶 **Title:** [{title[:35]}]({link})\n⏳ **Duration:** {duration}\n'
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
