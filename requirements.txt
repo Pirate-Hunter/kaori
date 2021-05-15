@@ -4,9 +4,6 @@ py-tgcalls
 python-dotenv
 youtube_dl
 youtube_search_python
-youtube_search
 youtube-dl
+youtube_search
 requests
-aiohttp
-asyncio
-search_engine_parser

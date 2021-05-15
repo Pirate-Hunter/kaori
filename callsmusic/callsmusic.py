@@ -1,6 +1,6 @@
 from pyrogram import Client
 from pytgcalls import PyTgCalls
-
+from handlers.play import quu
 import config
 from . import queues
 
@@ -15,8 +15,9 @@ def on_stream_end(chat_id: int) -> None:
     if queues.is_empty(chat_id):
         pytgcalls.leave_group_call(chat_id)
     else:
+        quu[chat_id].pop(0)
         pytgcalls.change_stream(
-            chat_id, queues.get(chat_id)["file"]
+            chat_id, queues.get(chat_id)["file_path"]
         )
 
 
