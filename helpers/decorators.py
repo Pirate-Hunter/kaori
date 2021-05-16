@@ -12,7 +12,10 @@ def errors(func: Callable) -> Callable:
         try:
             return await func(client, message)
         except Exception as e:
-            await message.reply(f"{type(e).__name__}: {e}")
+            if type(e).__name__ == "DownloadError":
+              await message.reply_text("Ahh sorry looks like i am not being able to download..., please retry again or use telegram files..")
+            else: 
+              await message.reply(f"{type(e).__name__}: {e}")
 
     return decorator
 

@@ -10,6 +10,12 @@ async def put(chat_id: int, **kwargs) -> int:
     await queues[chat_id].put({**kwargs})
     return queues[chat_id].qsize()
 
+def qget(chat_id: int) -> Union[Dict[str, str], None]:
+    if chat_id in queues:
+        try:
+            return queues[chat_id]
+        except Empty:
+            return "None" 
 
 def get(chat_id: int) -> Union[Dict[str, str], None]:
     if chat_id in queues:
